@@ -226,7 +226,7 @@ Add Screenshot Here
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/watchmanx.git
+git clone https://github.com/gurumdlrdev-hub/WatchmanX
 cd watchmanx
 ```
 
