@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchmanX - Alert Email Setup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background-color: #020817;
+      background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1787514601/blue_light_gradient_by_EvgeniyZemelko_fyi1s6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar {
+      width: 100%;
+      height: 70px;
+      background: rgba(10, 17, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(38, 64, 102, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .brand-x {
+      font-size: 30px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-left: 2px;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+    }
+    .nav-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #cbd5e1;
+      text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .nav-btn:hover {
+      background: #0ea5e9;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+    }
+    .main-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+      padding: 2rem 1rem;
+    }
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(180deg, rgba(16, 26, 43, 0.95) 0%, rgba(9, 16, 28, 0.98) 100%);
+      border: 1px solid rgba(30, 58, 95, 0.7);
+      border-radius: 18px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+    }
+    .card-title {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+    .field-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #94a3b8;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .input-box {
+      width: 100%;
+      background: rgba(13, 22, 38, 0.95);
+      border: 1px solid rgba(30, 58, 95, 0.7);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      outline: none;
+      margin-bottom: 1.2rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .input-box:focus { border-color: #0ea5e9; }
+    .btn-submit {
+      width: 100%;
+      padding: 0.95rem;
+      background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 0 16px rgba(14, 165, 233, 0.4);
+    }
+    .bottom-bar { padding: 1rem; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="/Frontend/home.html" class="brand-title">WATCHMAN<span class="brand-x">X</span></a>
+    <a href="/Frontend/home.html" class="nav-btn">Home</a>
+  </header>
+
+  <main class="main-container">
+    <div class="card">
+      <h1 class="card-title">EMAIL CONFIG</h1>
+      <form action="/api/configure-email" method="POST">
+        <label class="field-label">YOUR GMAIL ADDRESS</label>
+        <input type="email" name="sender_email" class="input-box" placeholder="security@gmail.com" required />
+
+        <label class="field-label">16-DIGIT APP PASSWORD</label>
+        <input type="password" name="app_password" class="input-box" placeholder="abcd efgh ijkl mnop" required />
+
+        <label class="field-label">ALERT DESTINATION INBOX</label>
+        <input type="email" name="alert_email" class="input-box" placeholder="myinbox@gmail.com" required />
+
+        <button type="submit" class="btn-submit">SAVE SETTINGS</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="bottom-bar"></footer>
+
+</body>
+</html>

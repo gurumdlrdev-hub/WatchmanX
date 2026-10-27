@@ -1,0 +1,11 @@
+*.exe
+watchmanx.exe
+*.dll
+*.log
+service_out.log
+service_err.log
+.DS_Store
+Thumbs.db
+WatchmanX/
+*.onnx
+Cascades/*.onnx

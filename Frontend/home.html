@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchmanX - Neural Vision Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800;900&family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background-color: #020817;
+      background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1787514601/blue_light_gradient_by_EvgeniyZemelko_fyi1s6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      width: 100%;
+      height: 70px;
+      background: rgba(10, 17, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(38, 64, 102, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand-x {
+      font-size: 30px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-left: 2px;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .auth-btn, .nav-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #cbd5e1;
+      text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .auth-btn:hover, .nav-btn:hover {
+      background: #0ea5e9;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+    }
+
+    .main-layout {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .media-viewport {
+      width: 100%;
+      aspect-ratio: 5 / 5;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1.5px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 35px rgba(14, 165, 233, 0.25), 0 20px 40px rgba(0, 0, 0, 0.8);
+      position: relative;
+      background: transparent;
+    }
+
+    .media-viewport img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .content-pane {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .system-box {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(10, 17, 32, 0.96) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 20px;
+      padding: 2.2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 30px rgba(14, 165, 233, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .section-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: #38bdf8;
+      text-transform: uppercase;
+    }
+
+    .headline {
+      font-family: 'Cinzel', serif;
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .headline span {
+      color: #38bdf8;
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      background: rgba(13, 22, 38, 0.8);
+      border: 1px solid rgba(30, 58, 95, 0.7);
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+    }
+
+    .step-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.86rem;
+      color: #f1f5f9;
+      line-height: 1.4;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      background: rgba(14, 165, 233, 0.2);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+    }
+
+    .step-num.bullet {
+      background: transparent;
+      border-color: #64748b;
+      color: #94a3b8;
+    }
+
+    .future-line {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      border-top: 1px dashed rgba(51, 65, 85, 0.8);
+      padding-top: 0.7rem;
+      margin-top: 0.2rem;
+    }
+
+    .cta-group {
+      margin-top: 0.4rem;
+    }
+
+    .btn-letsgo {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      text-decoration: none;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.45);
+      transition: all 0.2s ease;
+    }
+
+    .btn-letsgo:hover {
+      background: linear-gradient(180deg, #38bdf8 0%, #0369a1 100%);
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.65);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 900px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .navbar {
+        padding: 0 1rem;
+      }
+      .nav-links {
+        gap: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <a href="/Frontend/home.html" class="brand-title">WATCHMAN<span class="brand-x">X</span></a>
+
+    <nav class="nav-links">
+      <a href="/Frontend/add_face.html" class="nav-btn">Add New Face</a>
+      <a href="/Frontend/source_selector.html" class="nav-btn">Scanning Mode</a>
+      <a href="/Frontend/email_config.html" class="nav-btn">Email Setup</a>
+      <a href="/Frontend/instructions.html" class="nav-btn">Instruction</a>
+      
+    </nav>
+
+    <div>
+      <a href="/Frontend/signup.html" class="auth-btn">Register</a>
+    </div>
+  </header>
+
+  <!-- Main Body Content -->
+  <main class="main-layout">
+    
+    <!-- Left AI Image Frame -->
+    <div class="media-viewport">
+      <img 
+        src="https://res.cloudinary.com/ygllvtyg/image/upload/v1789242556/Webpageimage_quzlap.jpg" 
+        alt="Cyber Security AI Surveillance" 
+      />
+    </div>
+
+    <!-- Right Unified System Box -->
+    <div class="content-pane">
+      <div class="system-box">
+        
+        <h1 class="headline">Smart Camera <span>Security</span> System</h1>
+        
+        <p class="description">
+          WatchmanX keeps an eye on your place 24/7. It recognizes known people and alerts you immediately if a stranger enters.
+        </p>
+
+        <div class="steps-list">
+          <div class="step-line">
+            <span class="step-num">1</span>
+            <span>Camera spots any face in real-time.</span>
+          </div>
+          <div class="step-line">
+            <span class="step-num">2</span>
+            <span>Checks the face with your saved list.</span>
+          </div>
+          <div class="step-line">
+            <span class="step-num">3</span>
+            <span>If it is a stranger, it snaps a photo and emails you right away.</span>
+          </div>
+          <div class="step-line future-line">
+            <span class="step-num bullet">&bull;</span>
+            <span>Supports multi-camera setup, instant phone alerts, and loud intruder alarm.</span>
+          </div>
+        </div>
+
+        <div class="cta-group">
+          <a href="/Frontend/login.html" class="btn-letsgo">Let's Go &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

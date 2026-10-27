@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchmanX - Active Surveillance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800;900&family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background-color: #020817;
+      background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1787514601/blue_light_gradient_by_EvgeniyZemelko_fyi1s6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    /* Exact Login Card Geometry & Glassmorphism */
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(10, 17, 32, 0.96) 100%);
+      border: 1px solid rgba(38, 64, 102, 0.7);
+      border-radius: 24px;
+      padding: 3rem 2.4rem 2.4rem;
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.85), 0 0 50px rgba(14, 165, 233, 0.15);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Brand Header & Signature Blue Glow */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: #ffffff;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-title .brand-x {
+      font-family: 'Cinzel', serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-left: 4px;
+      text-shadow: 0 0 22px rgba(56, 189, 248, 0.85);
+    }
+
+    .sub-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    /* Status HUD Bar */
+    .hud-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.2rem;
+      margin-bottom: 0.8rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+
+    .hud-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #ef4444;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #ef4444;
+      animation: pulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    /* Video Viewport matching Login Input Box Style */
+    .viewport-container {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: rgba(11, 18, 33, 0.95);
+      border: 1px solid rgba(38, 64, 102, 0.8);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+      margin-bottom: 1.6rem;
+    }
+
+    .viewport-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Login Glow Action Button */
+    .btn-action {
+      width: 100%;
+      padding: 1.05rem;
+      background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 24px rgba(14, 165, 233, 0.45);
+      transition: all 0.2s ease;
+      display: block;
+    }
+
+    .btn-action:hover {
+      background: linear-gradient(180deg, #38bdf8 0%, #0369a1 100%);
+      box-shadow: 0 0 32px rgba(56, 189, 248, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .btn-action:active {
+      transform: translateY(0);
+      box-shadow: 0 0 14px rgba(14, 165, 233, 0.4);
+    }
+
+    /* Footer / Helper Text */
+    .card-footer {
+      margin-top: 1.6rem;
+      font-size: 0.78rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    .card-footer a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .card-footer a:hover {
+      color: #7dd3fc;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="brand-header">
+      <h1 class="brand-title">WATCHMAN<span class="brand-x">X</span></h1>
+    </div>
+    
+    <div class="sub-title">VISION ALARM CONSOLE</div>
+
+    <div class="hud-bar">
+      <div class="hud-status">
+        <span class="status-dot"></span> LIVE SURVEILLANCE
+      </div>
+      <div>CORE: <span style="color:#38bdf8;">ACTIVE</span></div>
+    </div>
+
+    <div class="viewport-container">
+      <img src="/api/video-feed" alt="Surveillance Stream" />
+    </div>
+
+    <a href="/api/stop-surveillance" class="btn-action" style="background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%); margin-top: 1rem;">
+      STOP SURVEILLANCE & QUIT
+    </a>
+
+    <div class="card-footer">
+      Terminal Active &bull; <a href="/Frontend/login.html">Disconnect Console</a>
+    </div>
+  </div>
+
+</body>
+</html>

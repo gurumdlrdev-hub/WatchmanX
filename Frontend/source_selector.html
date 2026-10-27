@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchmanX - Video Source Configurator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background-color: #020817;
+      background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1787514601/blue_light_gradient_by_EvgeniyZemelko_fyi1s6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar {
+      width: 100%;
+      height: 70px;
+      background: rgba(10, 17, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(38, 64, 102, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .brand-x {
+      font-size: 30px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-left: 2px;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+    }
+    .nav-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #cbd5e1;
+      text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .nav-btn:hover {
+      background: #0ea5e9;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+    }
+    .main-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+      padding: 2rem 1rem;
+    }
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(180deg, rgba(16, 26, 43, 0.95) 0%, rgba(9, 16, 28, 0.98) 100%);
+      border: 1px solid rgba(30, 58, 95, 0.7);
+      border-radius: 18px;
+      padding: 2.8rem 2.2rem 2.4rem;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(14, 165, 233, 0.15);
+      text-align: center;
+    }
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .hardware-info-box {
+      background: rgba(13, 22, 38, 0.85);
+      border: 1px solid rgba(30, 58, 95, 0.7);
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .camera-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+      flex-shrink: 0;
+    }
+    .hardware-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .hardware-desc {
+      font-size: 0.74rem;
+      color: #64748b;
+      margin-top: 3px;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.45);
+      transition: all 0.2s ease;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(180deg, #38bdf8 0%, #0369a1 100%);
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.7);
+      transform: translateY(-2px);
+    }
+    .bottom-bar { padding: 1rem; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="/Frontend/home.html" class="brand-title">WATCHMAN<span class="brand-x">X</span></a>
+    <a href="/Frontend/home.html" class="nav-btn">Home</a>
+  </header>
+
+  <main class="main-container">
+    <div class="card">
+      <h1 class="card-title">SURVEILLANCE SENSOR</h1>
+      <p class="subtitle">Optical Feed Configurator</p>
+
+      <div class="hardware-info-box">
+        <div class="camera-indicator"></div>
+        <div>
+          <div class="hardware-label">Primary Camera</div>
+          <div class="hardware-desc">Integrated Webcam (Device ID: 0) ready</div>
+        </div>
+      </div>
+
+      <form action="/api/select-source" method="POST">
+        <input type="hidden" name="source_type" value="1" />
+        <button type="submit" class="btn-submit">INITIALIZE FEED</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="bottom-bar"></footer>
+
+</body>
+</html>

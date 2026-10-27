@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchmanX - User Guide & Setup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800;900&family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background-color: #020817;
+      background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1787514601/blue_light_gradient_by_EvgeniyZemelko_fyi1s6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      width: 100%;
+      height: 70px;
+      background: rgba(10, 17, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(38, 64, 102, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand-x {
+      font-size: 30px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-left: 2px;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+    }
+
+    .nav-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #cbd5e1;
+      text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .nav-btn:hover {
+      background: #0ea5e9;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 2.2rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* High-contrast header box */
+    .header-box {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(10, 17, 32, 0.96) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75), 0 0 30px rgba(14, 165, 233, 0.18);
+    }
+
+    .page-title {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.6rem;
+    }
+
+    .page-title span {
+      color: #38bdf8;
+      text-shadow: 0 0 20px rgba(56, 189, 248, 0.9), 0 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .page-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #cbd5e1;
+      letter-spacing: 0.02em;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(10, 17, 32, 0.96) 100%);
+      border: 1px solid rgba(38, 64, 102, 0.8);
+      border-radius: 16px;
+      padding: 1.6rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .card.gmail-card {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 25px rgba(14, 165, 233, 0.2);
+    }
+
+    .step-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+    }
+
+    .step-text {
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .step-text strong {
+      color: #38bdf8;
+    }
+
+    .gmail-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.8rem;
+    }
+
+    .gmail-step-item {
+      background: rgba(13, 22, 38, 0.85);
+      border-left: 3px solid #38bdf8;
+      border-radius: 0 8px 8px 0;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    .gmail-step-item strong {
+      color: #ffffff;
+    }
+
+    .code-badge {
+      display: inline-block;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #38bdf8;
+      font-size: 0.8rem;
+    }
+
+    .note-box {
+      margin-top: 1rem;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      color: #fca5a5;
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .rule-box {
+      background: rgba(13, 22, 38, 0.85);
+      border-radius: 10px;
+      padding: 1rem;
+      border: 1px solid rgba(30, 58, 95, 0.7);
+    }
+
+    .rule-box.green {
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    .rule-box.red {
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .rule-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .rule-tag.green {
+      color: #4ade80;
+    }
+
+    .rule-tag.red {
+      color: #f87171;
+    }
+
+    .bottom-bar {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.7rem 1.6rem;
+      background: rgba(13, 22, 38, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 8px;
+      color: #38bdf8;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background: #0ea5e9;
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(14, 165, 233, 0.5);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 650px) {
+      .rules-grid {
+        grid-template-columns: 1fr;
+      }
+      .navbar {
+        padding: 0 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <a href="/Frontend/home.html" class="brand-title">WATCHMAN<span class="brand-x">X</span></a>
+    <a href="/Frontend/home.html" class="nav-btn">Home</a>
+  </header>
+
+  <!-- Main Instructions Container -->
+  <main class="container">
+    
+    <div class="header-box">
+      <h1 class="page-title">SYSTEM GUIDE & <span>SETTINGS</span></h1>
+      <p class="page-subtitle">Simple instructions to configure your camera, faces, and email alerts.</p>
+    </div>
+
+    <!-- Step 1: Login -->
+    <div class="card">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        <span>Account Registration</span>
+      </div>
+      <p class="step-text">
+        First, register your operator account in <strong>Register</strong> and sign in to get access to the dashboard.
+      </p>
+    </div>
+
+    <!-- Step 2: Gmail App Password Setup -->
+    <div class="card gmail-card">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        <span>Gmail Alert Setup (Google App Password)</span>
+      </div>
+      <p class="step-text">
+        To allow WatchmanX to automatically send stranger alert photos to your inbox, you must generate a <strong>Google App Password</strong>:
+      </p>
+
+      <div class="gmail-steps">
+        <div class="gmail-step-item">
+          <strong>1. Open Google Security:</strong> Visit your <span class="code-badge">myaccount.google.com/security</span> and ensure <strong>2-Step Verification</strong> is switched ON.
+        </div>
+        <div class="gmail-step-item">
+          <strong>2. Create App Password:</strong> Search for <strong>App Passwords</strong> in the top search bar inside your Google Account settings.
+        </div>
+        <div class="gmail-step-item">
+          <strong>3. Enter Name:</strong> Type <span class="code-badge">WatchmanX</span> as the app name and click <strong>Create</strong>.
+        </div>
+        <div class="gmail-step-item">
+          <strong>4. Copy Key:</strong> Google will show a 16-character code (e.g. <span class="code-badge">abcd efgh ijkl mnop</span>). Paste this key inside your backend <span class="code-badge">email_alert.go</span> as your sender password.
+        </div>
+      </div>
+
+      <div class="note-box">
+        <strong>Important:</strong> Do not enter your normal Gmail account password. Google only allows sending automated emails through 16-character App Passwords.
+      </div>
+    </div>
+
+    <!-- Step 3: Add Faces -->
+    <div class="card">
+      <div class="step-title">
+        <span class="step-number">3</span>
+        <span>Save Known Faces (Add Face)</span>
+      </div>
+      <p class="step-text">
+        Go to <strong>Add New Face</strong>. Enter the person's name and details. Look straight into the webcam and trigger scan. The biometric vector is safely stored in PostgreSQL.
+      </p>
+    </div>
+
+    <!-- Step 4: Scanning & Email Alerts -->
+    <div class="card">
+      <div class="step-title">
+        <span class="step-number">4</span>
+        <span>Start Surveillance Feed</span>
+      </div>
+      <p class="step-text">
+        Open <strong>Scanning Mode</strong>, ensure your alert email is set up, and click <strong>Initialize Feed</strong> to start the primary camera.
+      </p>
+    </div>
+
+    <!-- Step 5: On-screen Detection Rules -->
+    <div class="card">
+      <div class="step-title">
+        <span class="step-number">5</span>
+        <span>Live Camera Rules</span>
+      </div>
+      <div class="rules-grid">
+        <div class="rule-box green">
+          <div class="rule-tag green">✔ KNOWN PERSON (SAFE)</div>
+          <p class="step-text">
+            Green box with name and role. Safe entry, no alert is triggered.
+          </p>
+        </div>
+
+        <div class="rule-box red">
+          <div class="rule-tag red">✖ UNKNOWN STRANGER (ALERT)</div>
+          <p class="step-text">
+            Red box with UNKNOWN warning. The camera captures their face and emails it directly to you within seconds!
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Go Back Action -->
+  <footer class="bottom-bar">
+    <a href="/Frontend/home.html" class="btn-back">&larr; Return to Home</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchmanX - Operator Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800;900&family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background-color: #020817;
+      background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1787514601/blue_light_gradient_by_EvgeniyZemelko_fyi1s6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Top Navbar */
+    .navbar {
+      width: 100%;
+      height: 70px;
+      background: rgba(10, 17, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(38, 64, 102, 0.7);
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand-x {
+      font-size: 30px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-left: 2px;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+    }
+
+    /* Center Authentication Card */
+    .auth-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 1.5rem;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(10, 17, 32, 0.96) 100%);
+      opacity: 0.9;
+      border: 1px solid rgba(38, 64, 102, 0.8);
+      border-radius: 20px;
+      padding: 2.4rem 2.2rem 2rem;
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.85), 0 0 40px rgba(14, 165, 233, 0.15);
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      text-align: center;
+      letter-spacing: 2px;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: #64748b;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .field-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .input-box {
+      width: 100%;
+      background: rgba(13, 22, 38, 0.95);
+      border: 1px solid rgba(30, 58, 95, 0.7);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-box:focus {
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25);
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.95rem;
+      background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.45);
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(180deg, #38bdf8 0%, #0369a1 100%);
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .switch-link {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    .switch-link a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    .switch-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Bottom Go Back Button */
+    .bottom-bar {
+      padding: 1.8rem;
+      text-align: center;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.65rem 1.4rem;
+      background: rgba(13, 22, 38, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 8px;
+      color: #38bdf8;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background: #0ea5e9;
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(14, 165, 233, 0.5);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <a href="/Frontend/home.html" class="brand-title">WATCHMAN<span class="brand-x">X</span></a>
+  </header>
+
+  <!-- Center Card -->
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1 class="card-title">Login</h1>
+
+      <form action="/login" method="POST" class="auth-form">
+        <div>
+          <label class="field-label" for="username">Username</label>
+          <input type="text" id="username" name="username" class="input-box" placeholder="Username" required autocomplete="off" />
+        </div>
+
+        <div>
+          <label class="field-label" for="password">Password</label>
+          <input type="password" id="password" name="password" class="input-box" placeholder="Password" required />
+        </div>
+
+        <button type="submit" class="btn-submit">LOG IN</button>
+      </form>
+
+      <div class="switch-link">
+        Create Account? <a href="/Frontend/signup.html">Signup here</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Go Back Action -->
+  <footer class="bottom-bar">
+    <a href="/Frontend/home.html" class="btn-back">&larr; Go Back to Home</a>
+  </footer>
+
+</body>
+</html>
